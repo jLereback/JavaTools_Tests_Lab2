@@ -1,5 +1,7 @@
 package kata;
 
+import java.util.Arrays;
+
 public class Game {
 	private final int[] rolls = new int[21];
 	private int counter;
@@ -17,12 +19,21 @@ public class Game {
 
 	public int score() {
 		int score = 0;
-		for (int i = 0; i < rolls.length-1; i++) {
-			if (i % 2 == 0 && rolls[i] + rolls[i+1] == 10) {
-				score += rolls[i] + rolls[i + 1] + rolls[2];
-				i++;
+		int rollCount = 0;
+		System.out.println(Arrays.toString(rolls));
+		for (int i = 0; i < 10; i++) {
+			if (rollCount % 2 == 0 && rolls[rollCount] + rolls[rollCount+1] == 10) {
+				score += rolls[rollCount] + rolls[rollCount + 1] + rolls[2];
+				rollCount++;
 			}
-			else score += rolls[i];
+			else if (rolls[rollCount] == 10 && (rollCount % 2 == 1 || i == 0 )) {
+				score += rolls[rollCount] + rolls[rollCount + 1] + rolls[2];
+			}
+			else {
+				score += rolls[rollCount] + rolls[rollCount + 1];
+				rollCount++;
+			}
+			rollCount++;
 		}
 		return score;
 	}

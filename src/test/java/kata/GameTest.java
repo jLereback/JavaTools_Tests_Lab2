@@ -38,10 +38,10 @@ public class GameTest {
 
 	@DisplayName("Strike result in expected score")
 	@ParameterizedTest()
-	@CsvSource({"1, 1, 30"})
+	@CsvSource({"1, 1, 30", "12, 0, 300"})
 	void strikeResultInExpectedScore(int numRolls, int pinsKnockedDown, int expected) {
 		rollMultiple(numRolls, 10);
-		rollMultiple(numRolls * 2 - 21, pinsKnockedDown);
+		rollMultiple(21 - (numRolls * 2), pinsKnockedDown);
 		assertThat(game.score()).isEqualTo(expected);
 	}
 
