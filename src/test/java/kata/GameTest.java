@@ -26,8 +26,8 @@ public class GameTest {
 		assertThat(game.score()).isEqualTo(expected);
 	}
 
-	@DisplayName("Full game result in expected score")
-	@ParameterizedTest(name = "{index} ==> {0} roll(s) with {1} pins down = {2} score")
+	@DisplayName("Too many rolls result in exception")
+	@ParameterizedTest(name = "{index} ==> {0} roll(s) with {1} pins down throws exception")
 	@CsvSource({"21, 5", "20, 1"})
 	void oneRollMoreThanFullGameResultInException(int numRolls, int pinsKnockedDown) {
 		rollMultiple(numRolls, pinsKnockedDown);
@@ -35,6 +35,16 @@ public class GameTest {
 				hasMessage("The game is over\nPlease start a new game").
 				isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@DisplayName("Strike result in expected score")
+	@ParameterizedTest()
+	@CsvSource({"1, 1, 30"})
+	void strikeResultInExpectedScore(int numRolls, int pinsKnockedDown, int expected) {
+		rollMultiple(numRolls, 10);
+		rollMultiple(numRolls * 2 - 21, pinsKnockedDown);
+		assertThat(game.score()).isEqualTo(expected);
+	}
+
 	private void rollMultiple(int numRolls, int pinsKnockedDown) {
 		for (int i = 0; i < numRolls; i++)
 			game.roll(pinsKnockedDown);

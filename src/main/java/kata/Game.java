@@ -11,6 +11,8 @@ public class Game {
 					Please start a new game""");
 		rolls[counter] += pinsKnockedDown;
 		counter++;
+		if (counter == 20 && rolls[18] + rolls[19] < 10)
+			counter++;
 	}
 
 	public int score() {
