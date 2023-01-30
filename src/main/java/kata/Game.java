@@ -11,7 +11,7 @@ public class Game {
 
 	public int score() {
 		int score = 0;
-		for (int i = 0; i < counter; i++) {
+		for (int i = 0; i < rolls.length-1; i++) {
 			if (i % 2 == 0 && rolls[i] + rolls[i+1] == 10) {
 				score += rolls[i] + rolls[i + 1] + rolls[2];
 				i++;
