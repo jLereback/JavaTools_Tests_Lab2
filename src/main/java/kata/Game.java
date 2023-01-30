@@ -23,11 +23,11 @@ public class Game {
 		System.out.println(Arrays.toString(rolls));
 		for (int i = 0; i < 10; i++) {
 			if (rollCount % 2 == 0 && rolls[rollCount] + rolls[rollCount+1] == 10) {
-				score += rolls[rollCount] + rolls[rollCount + 1] + rolls[2];
+				score += rolls[rollCount] + rolls[rollCount + 1] + rolls[rollCount + 2];
 				rollCount++;
 			}
-			else if (rolls[rollCount] == 10 && (rollCount % 2 == 1 || i == 0 )) {
-				score += rolls[rollCount] + rolls[rollCount + 1] + rolls[2];
+			else if (rolls[rollCount] == 10) {
+				score += rolls[rollCount] + rolls[rollCount + 1] + rolls[rollCount + 2];
 			}
 			else {
 				score += rolls[rollCount] + rolls[rollCount + 1];

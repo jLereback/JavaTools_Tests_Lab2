@@ -1,6 +1,7 @@
 package kata;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -10,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class GameTest {
 	Game game = new Game();
 
-	@DisplayName("X rolls with Y pins knocked down result in expected score")
+	@DisplayName("Num rolls with amount of pins knocked down result in expected score")
 	@ParameterizedTest(name = "{index} ==> {0} roll(s) with {1} pins down = {2} score")
 	@CsvSource({"2, 4, 8", "4, 3, 12", "3, 5, 20"})
 	void xRollsResultInExpectedScore(int numRolls, int pinsKnockedDown, int expected) {
@@ -20,7 +21,7 @@ public class GameTest {
 
 	@DisplayName("Full game result in expected score")
 	@ParameterizedTest(name = "{index} ==> {0} roll(s) with {1} pins down = {2} score")
-	@CsvSource({"21, 5, 150", "20, 0, 0", "20, 1, 20"})
+	@CsvSource({"21, 5, 150", "20, 0, 0", "20, 1, 20", "12, 10, 300"})
 	void fullGamesResultInExpectedScore(int numRolls, int pinsKnockedDown, int expected) {
 		rollMultiple(numRolls, pinsKnockedDown);
 		assertThat(game.score()).isEqualTo(expected);
@@ -37,12 +38,11 @@ public class GameTest {
 	}
 
 	@DisplayName("Strike result in expected score")
-	@ParameterizedTest()
-	@CsvSource({"1, 1, 30", "12, 0, 300"})
-	void strikeResultInExpectedScore(int numRolls, int pinsKnockedDown, int expected) {
-		rollMultiple(numRolls, 10);
-		rollMultiple(21 - (numRolls * 2), pinsKnockedDown);
-		assertThat(game.score()).isEqualTo(expected);
+	@Test
+	void strikeResultInExpectedScore() {
+		rollMultiple(1, 10);
+		rollMultiple(18, 1);
+		assertThat(game.score()).isEqualTo(30);
 	}
 
 	private void rollMultiple(int numRolls, int pinsKnockedDown) {
