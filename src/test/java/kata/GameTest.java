@@ -28,7 +28,7 @@ public class GameTest {
 
 	@DisplayName("Full game result in expected score")
 	@ParameterizedTest(name = "{index} ==> {0} roll(s) with {1} pins down = {2} score")
-	@CsvSource({"21, 5"})
+	@CsvSource({"21, 5", "20, 1"})
 	void oneRollMoreThanFullGameResultInException(int numRolls, int pinsKnockedDown) {
 		rollMultiple(numRolls, pinsKnockedDown);
 		assertThatThrownBy(() -> game.roll(5)).

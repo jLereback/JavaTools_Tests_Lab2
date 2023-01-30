@@ -5,6 +5,10 @@ public class Game {
 	private int counter;
 
 	public void roll(int pinsKnockedDown) {
+		if (counter >= 21)
+			throw new IllegalArgumentException("""
+					The game is over
+					Please start a new game""");
 		rolls[counter] += pinsKnockedDown;
 		counter++;
 	}
