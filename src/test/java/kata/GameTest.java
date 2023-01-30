@@ -13,4 +13,13 @@ public class GameTest {
 		game.roll(4);
 		assertThat(game.score()).isEqualTo(8);
 	}
+
+	@Test
+	void fourRollsResultInScoreEqualToSum() {
+		game.roll(3);
+		game.roll(3);
+		game.roll(3);
+		game.roll(3);
+		assertThat(game.score()).isEqualTo(12);
+	}
 }
